@@ -1,4 +1,3 @@
-
 module.exports = {
     async runPrompt(prompt) {
         const options = {
@@ -11,12 +10,9 @@ module.exports = {
                 'prompt': prompt
             })
         }
-        console.log(prompt);
         try {
             const response = await fetch('https://api.openai.com/v1/images/generations', options);
             const data = await response.json();
-
-            console.log(data)
 
             let message = '';
             data?.data.forEach(imageObject => {
