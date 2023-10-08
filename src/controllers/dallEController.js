@@ -4,12 +4,12 @@ module.exports = {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-                'Content-Type': `application/json`
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 'prompt': prompt
             })
-        }
+        };
         try {
             const response = await fetch('https://api.openai.com/v1/images/generations', options);
             const data = await response.json();
@@ -31,4 +31,4 @@ module.exports = {
         });
         return await this.runPrompt(prompt);
     }
-}
+};

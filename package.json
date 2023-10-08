@@ -14,5 +14,8 @@
   "keywords": [],
   "author": "FiestaTheNewbieDev",
   "license": "MIT",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "eslint": "^8.51.0"
+  }
 }

@@ -16,7 +16,7 @@ async function loadEvents(client, dir) {
             client.on(event.name, (...args) => event.execute(client, ...args));
         }
 
-        console.log(`Event loaded: ${event.name}`)
+        console.log(`Event loaded: ${event.name}`);
     }
 
     const subdirs = await pGlob(path.join(dir, '*/'));

@@ -25,4 +25,4 @@ module.exports = {
             promptController.execute(client, message, prompt);
         }
     }
-}
+};

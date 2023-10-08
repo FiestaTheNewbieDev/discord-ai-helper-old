@@ -4,4 +4,4 @@ module.exports = {
     execute(client) {
         console.log(`\n${client.user.username} ready\n`);
     }
-}
+};

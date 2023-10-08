@@ -11,7 +11,7 @@ async function loadCommands(client, dir) {
     for (const commandFile of files) {
         const command = require(commandFile);
         client.commands.set(command.name, command);
-        console.log(`Command loaded: ${command.name}`)
+        console.log(`Command loaded: ${command.name}`);
     }
 
     const subdirectories = await pGlob(path.join(dir, '*/'));
@@ -23,4 +23,4 @@ async function loadCommands(client, dir) {
 
 module.exports = async (client) => {
     await loadCommands(client, path.join(process.cwd(), 'src/commands'));
-}
+};
