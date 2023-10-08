@@ -3,6 +3,8 @@ const {glob} = require('glob');
 const pGlob = promisify(glob);
 const path = require('path');
 
+// !WARNING! Handlers work only if glob is version 7.2.0
+
 async function loadCommands(client, dir) {
     const files = await pGlob(path.join(dir, '*.js'));
     
