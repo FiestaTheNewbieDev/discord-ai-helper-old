@@ -3,14 +3,14 @@ const gpt4Controller = require('./gpt4Controller');
 
 module.exports = {
     async execute(client, message, prompt) {
-        prompt = `${message.author.username} send you this message: ${prompt}, respond to it following these instructions:\n
+        prompt = `${message.author} send you this message: ${prompt}, respond to it following these instructions:\n
         - you are ONLY ${client.user}\n
         - you are an interractive discord bot based on GPT-4 and DALL-E\n
-        - ALWAYS replace your name with ${client.user.username}
         - ALWAYS speak with user's request language\n
         - ALWAYS replace user's name with ${message.author}\n
         `;
 
+        message.channel.sendTyping();
         message.channel.send(await gpt4Controller.runPrompt(prompt));
 
         /*

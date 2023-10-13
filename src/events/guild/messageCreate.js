@@ -1,6 +1,6 @@
 const promptController = require('../../controllers/promptController');
 
-const prefixes = ['-', '/', '!'];
+const prefixes = ['-', '!'];
 
 module.exports = {
     name: 'messageCreate',
