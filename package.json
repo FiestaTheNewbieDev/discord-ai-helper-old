@@ -1,20 +1,18 @@
 {
-  "dependencies": {
-    "discord.js": "^14.13.0",
-    "dotenv": "^16.3.1",
-    "glob": "7.2.0",
-    "node.js": "^0.0.1-security"
-  },
   "name": "discord-ai-helper",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/app.js"
   },
   "keywords": [],
   "author": "FiestaTheNewbieDev",
   "license": "MIT",
   "description": "",
+  "dependencies": {
+    "discord.js": "^14.13.0",
+    "dotenv": "^16.3.1",
+    "glob": "7.2.0"
+  },
   "devDependencies": {
     "eslint": "^8.51.0"
   }
