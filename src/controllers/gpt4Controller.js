@@ -19,5 +19,12 @@ module.exports = {
         } catch(error) {
             console.error(error);
         }
+    },
+    async runPromptWithArgs(args) {
+        let prompt = '';
+        args.forEach(arg => {
+            prompt = prompt + arg.toString() + ' ';
+        });
+        return await this.runPrompt(prompt);
     }
 };
