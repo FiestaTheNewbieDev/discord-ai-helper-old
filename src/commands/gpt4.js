@@ -1,8 +1,8 @@
 const gpt4Controller = require('../controllers/gpt4Controller');
 
 module.exports = {
-    name: 'gpt4',
-    description: 'Send raw prompt to GPT4',
+    name: 'gpt-4',
+    description: 'Send raw prompt to GPT-4',
     options: [
         {
             name: 'prompt',
