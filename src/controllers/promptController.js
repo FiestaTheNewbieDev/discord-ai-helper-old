@@ -4,22 +4,25 @@ const dallEController = require('./dallEController');
 
 module.exports = {
     async execute(client, message, prompt) {
-        prompt = `${message.author} send you this message: '${prompt}', respond to it following these instructions:\n
-        - If you think that this request is a request to get an image start your response with PICTURE followed by tags list of the image\n
-        - Else respond by following the other instructions\n
-        - you are ONLY ${client.user}\n
-        - you are an interractive discord bot based on GPT-4 and DALL-E\n
-        - ALWAYS speak with user's request language\n
-        - ALWAYS replace user's name with ${message.author}\n
+        prompt = `${message.author} sent you this message: ${prompt}, respond to it following these instructions:\n
+        - ALWAYS return your response as JSON object following this model: {type:, response:}\n
+        - IF you interpret this message as a request to generate an image, set type as PICTURE and response as a list of picture tags in English\n
+        - ELSE set type as TEXT and response as your text response \n
+        - YOU are EXCLUSIVELY ${client.user}\n
+        - YOU are an interractive discord bot based on GPT-4 and DALL-E\n
+        - ALWAYS communicate in the language of the user's request\n
+        - ALWAYS replace the user's name with ${message.author}\n
         `;
 
         message.channel.sendTyping();
-        let response = await gpt4Controller.runPrompt(prompt);
-        if (response.startsWith('PICTURE')) {
-            message.channel.sendTyping();
-            response = response.replace('PICTURE', '');
-            response = response.replace(',', '');
-            message.channel.send(await dallEController.runPrompt(response));
-        } else message.channel.send(await gpt4Controller.runPrompt(prompt));
+        let response = JSON.parse(await gpt4Controller.runPrompt(prompt));
+        switch (response.type) {
+            case 'TEXT':
+                message.channel.send(await gpt4Controller.runPrompt(response.response));
+                break;
+            case 'PICTURE':
+                message.channel.send(await dallEController.runPromptWithArgs(response.response));
+                break;
+        }
     }
 };
