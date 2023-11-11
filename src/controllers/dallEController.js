@@ -7,7 +7,8 @@ module.exports = {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                'prompt': prompt
+                model: 'dall-e-3',
+                prompt: prompt
             })
         };
         try {
