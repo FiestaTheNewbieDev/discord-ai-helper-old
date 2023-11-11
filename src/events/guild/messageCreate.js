@@ -1,4 +1,4 @@
-const promptController = require('../../controllers/promptController');
+const interractiveChatController = require('../../controllers/interractiveChatController');
 
 const prefix = '!';
 
@@ -20,7 +20,7 @@ module.exports = {
 
         if(message.mentions.has(client.user)) {
             let prompt = message.content.trim();
-            promptController.execute(client, message, prompt);
+            interractiveChatController.execute(client, message, prompt);
         }
     }
 };

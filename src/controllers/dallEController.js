@@ -1,6 +1,5 @@
 module.exports = {
     async runPrompt(prompt) {
-        console.log(prompt);
         const options = {
             method: 'POST',
             headers: {
