@@ -1,4 +1,5 @@
 const dotenv = require('dotenv');
+const chalk = require('chalk');
 const {Client, IntentsBitField, Collection} = require('discord.js');
 
 dotenv.config();
@@ -6,7 +7,6 @@ dotenv.config();
 const client = new Client({
     intents: [
         IntentsBitField.Flags.Guilds,
-        IntentsBitField.Flags.GuildMembers,
         IntentsBitField.Flags.GuildMessages,
         IntentsBitField.Flags.MessageContent
     ]
@@ -17,9 +17,23 @@ client.commands = new Collection();
 require('./handlers/eventsHandler')(client);
 require('./handlers/commandsHandler')(client);
 
-process.on('exit', code => {console.error('\x1b[31m' + `Process terminated. Error code: ${code}` + '\x1b[37m');});
-process.on('uncaughtException', (error, origin) => {console.error('\x1b[31m' + `Uncaught Exception: An unexpected error occurred. Error: ${error}. Origin: ${origin}` + '\x1b[37m');});
-process.on('unhandledRejection', (reason, promise) => {console.error('\x1b[31m' + `Unhandled Exception: An unexpected error occurred. Reason: ${reason}. Promise: ${promise}` + '\x1b[37m');});
-process.on('warning', (...args) => console.warn('\x1b[33m' + args + '\x1b[37m'));
+process.on('exit', code => {
+    console.error(chalk.red(`Process terminated. Error code: ${code}`));
+});
+process.on('uncaughtException', error => {
+    console.error(
+        chalk.red(
+            `Uncaught Exception: An unexpected error occurred.\n${error.stack}`
+        )
+    );
+});
+process.on('unhandledRejection', error => {
+    console.error(
+        chalk.red(
+            `Unhandled Exception: An unexpected error occurred.\n${error.stack}`
+        )
+    );
+});
+process.on('warning', (...args) => console.warn(chalk.yellow(args)));
 
 client.login(process.env.DISCORD_TOKEN);
