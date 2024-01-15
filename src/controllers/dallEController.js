@@ -3,33 +3,37 @@ module.exports = {
         const options = {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+                Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 model: 'dall-e-3',
-                prompt: prompt
+                prompt
             })
         };
         try {
-            const response = await fetch('https://api.openai.com/v1/images/generations', options);
+            const response = await fetch(
+                'https://api.openai.com/v1/images/generations',
+                options
+            );
             const data = await response.json();
 
             let message = '';
             data?.data.forEach(imageObject => {
-                message = message + imageObject.url + '\n';
+                message = `${message}${imageObject.url}\n`;
             });
 
             return message;
-        } catch(error) {
+        } catch (error) {
             console.error(error);
+            return null;
         }
     },
     async runPromptWithArgs(args) {
         let prompt = '';
         args.forEach(arg => {
-            prompt = prompt + arg.toString() + ' ';
+            prompt = `${prompt}${arg.toString()} `;
         });
-        return await this.runPrompt(prompt);
+        return this.runPrompt(prompt);
     }
 };

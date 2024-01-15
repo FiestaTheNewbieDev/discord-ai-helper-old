@@ -12,7 +12,7 @@ module.exports = {
         },
         {
             name: 'private',
-            'description': 'Make the command result private',
+            description: 'Make the command result private',
             required: false,
             type: 5
         }
@@ -22,12 +22,16 @@ module.exports = {
         message.channel.send(await dallEController.runPromptWithArgs(args));
     },
     runSlash: async (client, interaction) => {
-        await interaction.deferReply({ephemeral: interaction.options.getBoolean('private')}); 
+        await interaction.deferReply({
+            ephemeral: interaction.options.getBoolean('private')
+        });
         const args = interaction.options.getString('prompt');
         try {
             await interaction.editReply(await dallEController.runPrompt(args));
-        } catch(error) {
-            await interaction.followUp('An error occurred while processing your request.');
+        } catch (error) {
+            await interaction.followUp(
+                'An error occurred while processing your request.'
+            );
         }
     }
 };
